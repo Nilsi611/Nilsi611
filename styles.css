@@ -1,0 +1,417 @@
+:root {
+  color-scheme: dark;
+  font-family: "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  overflow: hidden;
+  background: #05070c;
+  color: #f5f7fb;
+}
+
+.wallpaper {
+  position: fixed;
+  inset: 0;
+  background:
+    linear-gradient(180deg, rgba(3, 8, 15, 0.18), rgba(3, 8, 15, 0.24)),
+    url("https://images.unsplash.com/photo-1500534623283-312aade485b7?auto=format&fit=crop&w=1920&q=80") center/cover;
+  transform: scale(1.03);
+  animation: slowZoom 24s ease-in-out infinite alternate;
+  filter: blur(1px);
+}
+
+.lock-screen,
+.login-screen,
+.desktop {
+  position: fixed;
+  inset: 0;
+}
+
+.lock-screen {
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.lock-content {
+  text-align: center;
+  color: #fff;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+}
+
+.lock-time {
+  font-size: clamp(3.6rem, 8vw, 6.4rem);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.lock-date {
+  margin-top: 10px;
+  font-size: clamp(1rem, 2.3vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.82);
+}
+
+.lock-hint {
+  margin-top: 18px;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.74);
+}
+
+.login-screen {
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  z-index: 3;
+  transition: opacity 280ms ease, visibility 280ms ease;
+}
+
+.login-screen.hidden,
+.lock-screen.hidden,
+.desktop.hidden {
+  display: none;
+}
+
+.login-screen.logging-in {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.login-screen.fade-out {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.auth-panel {
+  width: min(92vw, 360px);
+  text-align: center;
+  display: grid;
+  justify-items: center;
+}
+
+.avatar-wrap {
+  margin-bottom: 18px;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: reveal 360ms ease-out forwards;
+  animation-delay: 100ms;
+}
+
+.avatar {
+  width: 116px;
+  height: 116px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.24);
+}
+
+h1 {
+  margin: 0 0 6px;
+  font-size: 2rem;
+  font-weight: 600;
+  color: #fff;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: reveal 320ms ease-out forwards;
+  animation-delay: 180ms;
+}
+
+.subtitle {
+  margin: 0 0 12px;
+  color: rgba(245, 247, 251, 0.82);
+  font-size: 0.94rem;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: reveal 320ms ease-out forwards;
+  animation-delay: 240ms;
+}
+
+.config-hint {
+  margin: 0 0 16px;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.84rem;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: reveal 320ms ease-out forwards;
+  animation-delay: 260ms;
+}
+
+.login-form {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(8px);
+  animation: reveal 320ms ease-out forwards;
+  animation-delay: 300ms;
+}
+
+.login-form.hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 180ms ease, visibility 180ms ease;
+}
+
+.input-group,
+.password-field {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 42px;
+  padding: 0 12px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.input-group:focus-within,
+.password-field:focus-within {
+  border-color: rgba(255, 255, 255, 0.42);
+}
+
+.input-group svg,
+.password-field svg {
+  width: 16px;
+  height: 16px;
+  fill: rgba(255, 255, 255, 0.84);
+  flex-shrink: 0;
+}
+
+.input-group input,
+.password-field input {
+  flex: 1;
+  border: 0;
+  outline: 0;
+  background: transparent;
+  color: white;
+  font-size: 0.95rem;
+  padding: 0 8px;
+}
+
+.input-group input::placeholder,
+.password-field input::placeholder {
+  color: rgba(245, 247, 251, 0.58);
+}
+
+.toggle-password,
+.submit-btn {
+  border: 0;
+  background: transparent;
+  color: white;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  padding: 0;
+}
+
+.submit-btn {
+  width: 42px;
+  height: 42px;
+  justify-self: center;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.submit-btn svg,
+.toggle-password svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.welcome-stage {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  color: #fff;
+  margin-top: 18px;
+}
+
+.welcome-stage.visible {
+  display: flex;
+}
+
+.welcome-stage h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 500;
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.24);
+  border-top-color: white;
+  animation: spin 900ms linear infinite;
+}
+
+.error {
+  min-height: 1.2rem;
+  margin: 12px 0 0;
+  color: #ffc8c8;
+  font-size: 0.9rem;
+}
+
+.desktop {
+  background: url("https://images.unsplash.com/photo-1493246507139-91e8fad9978e?auto=format&fit=crop&w=1600&q=80") center/cover;
+}
+
+.desktop-icons {
+  position: absolute;
+  top: 24px;
+  left: 24px;
+  display: grid;
+  gap: 18px;
+}
+
+.desktop-icon {
+  width: 84px;
+  display: grid;
+  justify-items: center;
+  color: white;
+  font-size: 0.95rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 240ms ease, transform 240ms ease;
+}
+
+.desktop-icon.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.icon {
+  font-size: 2rem;
+  margin-bottom: 6px;
+}
+
+.taskbar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 54px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 12px;
+  background: rgba(8, 16, 26, 0.9);
+  color: white;
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1), opacity 320ms ease;
+}
+
+.taskbar.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.start-button {
+  margin: 0;
+  border: 0;
+  padding: 8px 12px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  cursor: pointer;
+}
+
+.taskbar-apps {
+  display: flex;
+  gap: 8px;
+  flex: 1;
+  margin-left: 12px;
+}
+
+.taskbar-app {
+  padding: 8px 10px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.taskbar-app.active {
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.clock {
+  font-weight: 600;
+  min-width: 56px;
+  text-align: right;
+}
+
+.start-menu {
+  position: absolute;
+  left: 12px;
+  bottom: 62px;
+  width: 220px;
+  padding: 8px;
+  border-radius: 10px;
+  background: rgba(240, 245, 250, 0.95);
+  color: #172029;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+.menu-item {
+  padding: 10px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.menu-item:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.hidden {
+  display: none;
+}
+
+@keyframes slowZoom {
+  from {
+    transform: scale(1.03);
+  }
+  to {
+    transform: scale(1.08);
+  }
+}
+
+@keyframes reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 640px) {
+  .input-group,
+  .password-field {
+    width: min(86vw, 340px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
